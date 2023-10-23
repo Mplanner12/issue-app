@@ -1,21 +1,31 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
+import { GiInsectJaws } from "react-icons/gi";
+import { usePathname } from "next/navigation";
 
 const NavBar = () => {
-  interface links {
-    label: string;
-    href: string;
-  }
+  const headedPath = usePathname();
+  console.log(headedPath);
   const links = [
     { label: "Dashboard", href: "/" },
     { label: "Issues", href: "/issues" },
   ];
   return (
     <nav className="px-2 py-4 flex space-x-6 border-b mb-5">
-      <Link href="/">Logo</Link>
+      <Link href="/">
+        <GiInsectJaws />
+      </Link>
       <ul className="flex space-x-6">
         {links.map((link) => (
-          <Link key={link.href} href={link.href}>
+          <Link
+            className={`hover:text-zinc-700 ${
+              headedPath === link.href ? "text-zinc-950" : "text-zinc-400"
+            }`}
+            key={link.href}
+            href={link.href}
+          >
             {link.label}
           </Link>
         ))}
